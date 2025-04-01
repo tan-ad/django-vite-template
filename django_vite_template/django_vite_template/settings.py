@@ -10,20 +10,30 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import environ
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b^zz$5u5ur%m-ceg3$224uacm!1v6^680e)(gsf-_(lkgu+%#='
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -33,7 +43,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # Your apps
     'users.apps.UsersConfig',
-    
+
     # Default Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,10 +88,8 @@ WSGI_APPLICATION = 'django_vite_template.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # function figures out 'ENGINE' and 'NAME' of file based on DATABASE_URL
+    'default': env.db()
 }
 
 

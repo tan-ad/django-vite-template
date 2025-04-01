@@ -17,3 +17,9 @@ django-admin startproject django_vite_template
 cd django_vite_template
 python manage.py startapp users
 ```
+
+### Prepare for Environment-Specific Settings
+
+```bash
+pip install django-environ
+```
