@@ -33,3 +33,20 @@ python manage.py makemigrations
 # Apply changes to tables in db
 python manage.py migrate
 ```
+
+### Check if django is working
+
+```bash
+# in backend directory
+python manage.py check
+python manage.py runserver
+```
+
+### Create the Vite/Vue Project
+
+```bash
+npm create vite@latest frontend -- --template vue
+cd frontend
+npm install
+npm run dev
+```
