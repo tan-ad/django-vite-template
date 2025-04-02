@@ -64,6 +64,13 @@ cd frontend
 npm install vue-router@4 # Use @4 for Vue 3
 ```
 
+### Create API app
+
+```bash
+cd backend
+python manage.py startapp api
+```
+
 ## Development workflow
 
 ### Backend
