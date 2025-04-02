@@ -78,6 +78,13 @@ pip install djangorestframework
 pip freeze > requirements.txt
 ```
 
+### Install axios for HTTP client
+
+```bash
+cd frontend
+npm install axios
+```
+
 ## Development workflow
 
 ### Backend
