@@ -101,3 +101,9 @@ python manage.py runserver # Runs on http://127.0.0.1:8000
 cd frontend # Navigate to Vue project root
 npm run dev # Runs on http://localhost:5173
 ```
+
+### With Docker
+
+```bash
+docker-compose up --build
+```
