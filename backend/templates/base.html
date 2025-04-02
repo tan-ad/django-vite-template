@@ -1,0 +1,34 @@
+{% load static %}
+{% load django_vite %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django + Vite + Vue</title>
+
+    {% comment %}
+      In development, vite_hmr_client loads vite client for HMR.
+      In production, vite_asset loads production assets.
+      This requires DJANGO_VITE_DEV_MODE in settings.py to be set correctly.
+    {% endcomment %}
+
+    {% vite_hmr_client %}
+
+    {% comment %} Load the Vite entry point (e.g., src/main.js) {% endcomment %}
+    {% vite_asset 'src/main.js' %}
+
+    {% comment %} You can also load other assets like CSS if needed separately {% endcomment %}
+    {% comment %} {% vite_asset 'src/style.css' %} {% endcomment %}
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="app">
+        <!-- Vue app will mount here -->
+    </div>
+
+    {% block body %}{% endblock %}
+</body>
+</html>

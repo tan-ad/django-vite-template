@@ -41,9 +41,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # Your apps
-    'users.apps.UsersConfig',
-
     # Default Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,11 +48,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Additional
+    'corsheaders',
+    'django_vite',
+
+    # Your apps
+    'users.apps.UsersConfig', # or 'users'
+
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # CORS
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -65,10 +72,38 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_vite_template.urls'
 
+# --- CORS Settings ---
+# In development, allow requests from the Vite dev server
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173", # Default Vite port
+    "http://127.0.0.1:5173",
+]
+# Or, for more flexibility in development:
+# CORS_ALLOW_ALL_ORIGINS = True # Use with caution, maybe restrict later
+
+
+# --- Django Vite Settings ---
+DJANGO_VITE_ASSETS_PATH = os.path.join(BASE_DIR, 'frontend_dist')
+DJANGO_VITE_DEV_MODE = True # Set to False in production
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATICFILES_DIRS = [
+    # Path to your Vite build output directory (when you run 'npm run build')
+    DJANGO_VITE_ASSETS_PATH,
+]
+
+STATIC_URL = 'static/'
+# STATIC_ROOT is where 'collectstatic' will gather all static files for production deployment
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_prod')
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,11 +158,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

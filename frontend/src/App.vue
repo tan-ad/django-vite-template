@@ -1,30 +1,54 @@
+<!-- frontend/src/App.vue -->
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+// Import RouterLink if you want navigation links here
+import { RouterLink, RouterView } from 'vue-router'
+// import HelloWorld from './components/HelloWorld.vue' // Remove default HelloWorld if not needed
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <header>
+    <!-- Example Navigation -->
+    <nav>
+      <RouterLink to="/">Home</RouterLink> |
+      <RouterLink to="/about">About</RouterLink>
+    </nav>
+  </header>
+
+  <main>
+     <!-- Components matched by the route will be rendered here -->
+    <RouterView />
+  </main>
+
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+ /* Add some basic styling */
+  header {
+    line-height: 1.5;
+    max-height: 100vh;
+    margin-bottom: 2rem;
+  }
+  nav {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  nav a.router-link-exact-active {
+    color: var(--color-text);
+  }
+  nav a.router-link-exact-active:hover {
+    background-color: transparent;
+  }
+  nav a {
+    display: inline-block;
+    padding: 0 1rem;
+    border-left: 1px solid var(--color-border);
+  }
+  nav a:first-of-type {
+    border: 0;
+  }
+  main {
+    padding: 1rem;
+  }
 </style>

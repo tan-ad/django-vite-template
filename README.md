@@ -50,3 +50,33 @@ cd frontend
 npm install
 npm run dev
 ```
+
+### Install packages for Development Integration
+
+```bash
+pip install django-cors-headers django-vite
+```
+
+### Install Vue Router
+
+```bash
+cd frontend
+npm install vue-router@4 # Use @4 for Vue 3
+```
+
+## Development workflow
+
+### Backend
+
+```bash
+cd django_vite_template # Navigate to Django project root
+source ../venv/bin/activate # Activate venv
+python manage.py runserver # Runs on http://127.0.0.1:8000
+```
+
+### Frontend
+
+```bash
+cd frontend # Navigate to Vue project root
+npm run dev # Runs on http://localhost:5173
+```

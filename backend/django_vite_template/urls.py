@@ -1,22 +1,29 @@
-"""
-URL configuration for django_vite_template project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include # Make sure include is imported if using API include
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import index_view # Import your view serving base.html
 
 urlpatterns = [
+    # 1. Django Admin
     path('admin/', admin.site.urls),
+
+    # 2. API Routes
+    # path('api/', include('your_api_app.urls')),
+
+    # 3. Frontend Catch-all (serves the Vue app)
+    # IMPORTANT: This must come AFTER admin and API routes
+    # It matches any path that does NOT start with 'admin/', 'api/', 'static/', or 'media/'
+    # Adjust the prefixes (e.g., 'api/') if your API lives elsewhere.
+    re_path(r'^(?!api/|admin/|static/|media/).*$', index_view, name='index'),
 ]
+
+# 4. Static and Media files (DEBUG mode only)
+if settings.DEBUG:
+    # Serve static files using Django's static serve view
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+    # Serve media files (user uploads) using Django's static serve view
+    # Ensure MEDIA_URL and MEDIA_ROOT are set in settings.py if you use this
+    if hasattr(settings, 'MEDIA_URL') and settings.MEDIA_URL:
+        urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
