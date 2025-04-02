@@ -1,0 +1,41 @@
+services:
+  backend:
+    build: ./backend
+    container_name: django_backend_dev
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      # Mount the entire backend directory for live code changes
+      - ./backend:/app
+    ports:
+      - "8000:8000" # Map host 8000 to container 8000
+    env_file:
+      # Load environment variables from this file
+      # Ensure DEBUG, DJANGO_VITE_DEV_MODE, SECRET_KEY, DATABASE_URL,
+      # ALLOWED_HOSTS (including 'backend'), CORS_ALLOWED_ORIGINS,
+      # and DJANGO_VITE_DEV_SERVER_URL (e.g., http://frontend:5173) are set within.
+      - ./backend/.env
+    # No 'environment:' overrides needed here if vars are correctly set in .env_file
+    networks:
+      - app-network
+    # 'depends_on: - frontend' removed as it's usually not necessary
+
+  frontend:
+    build: ./frontend
+    container_name: vite_frontend_dev
+    # command relies on Dockerfile CMD ["npm", "run", "dev", "--", "--host"]
+    volumes:
+      - ./frontend:/app # Mount host code into container for live changes
+      - /app/node_modules # Prevent host node_modules from overwriting container's
+    ports:
+      - "5173:5173" # Map host 5173 to container 5173
+    environment:
+      # Vite needs this to know where to proxy API requests within Docker network
+      - VITE_API_PROXY_TARGET=http://backend:8000
+      # It's good practice to set NODE_ENV for many Node tools
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
