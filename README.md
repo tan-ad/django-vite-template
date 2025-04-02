@@ -71,6 +71,13 @@ cd backend
 python manage.py startapp api
 ```
 
+### Install DRF
+
+```bash
+pip install djangorestframework
+pip freeze > requirements.txt
+```
+
 ## Development workflow
 
 ### Backend
