@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 
     # Your apps
     'users.apps.UsersConfig', # or 'users'
+    'api',
 
 
 ]

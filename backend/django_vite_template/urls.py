@@ -1,17 +1,14 @@
 from django.contrib import admin
-from django.urls import path, re_path, include # Make sure include is imported if using API include
+from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import index_view # Import your view serving base.html
 
 urlpatterns = [
-    # 1. Django Admin
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
 
-    # 2. API Routes
-    # path('api/', include('your_api_app.urls')),
-
-    # 3. Frontend Catch-all (serves the Vue app)
+    # Frontend Catch-all (serves the Vue app)
     # IMPORTANT: This must come AFTER admin and API routes
     # It matches any path that does NOT start with 'admin/', 'api/', 'static/', or 'media/'
     # Adjust the prefixes (e.g., 'api/') if your API lives elsewhere.
