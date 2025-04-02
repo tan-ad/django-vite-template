@@ -13,20 +13,12 @@ const apiClient = axios.create({
 // apiClient.interceptors.response.use(...)
 
 export default {
-  getItems() {
-    return apiClient.get('/items/');
-  },
-  getItem(id) {
-    return apiClient.get(`/items/${id}/`);
-  },
-  createItem(data) {
-    return apiClient.post('/items/', data);
-  },
-  updateItem(id, data) {
-    return apiClient.put(`/items/${id}/`, data);
-  },
-  deleteItem(id) {
-    return apiClient.delete(`/items/${id}/`);
+  /**
+   * Simple check to see if the API is responsive.
+   * Assumes a '/api/ping/' endpoint exists on the backend.
+   */
+  checkApiStatus() {
+    // Using GET for simplicity, could be POST if preferred
+    return apiClient.get('/ping/');
   }
-  // Add other endpoints as needed
 };
