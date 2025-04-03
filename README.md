@@ -90,7 +90,7 @@ This project provides a template structure. The recommended way to use it is via
 ### Prerequisites
 
 *   [Git](https://git-scm.com/) (You'll need this to manage your new project)
-*   A GitHub/GitLab (or similar) account
+*   A GitHub account
 *   [Docker Engine](https://docs.docker.com/engine/install/)
 *   [Docker Compose](https://docs.docker.com/compose/install/) (Often included with Docker Desktop)
 *   [Python 3.13+](https://www.python.org/) (If setting up local venv for IDE)
@@ -99,7 +99,7 @@ This project provides a template structure. The recommended way to use it is via
 ### Setup & Running (Using Template Feature)
 
 1.  **Create Your Own Repository from this Template:**
-    *   Navigate to the main page of *this* template repository on GitHub/GitLab.
+    *   Navigate to the main page of *this* template repository on GitHub.
     *   Click the "**Use this template**" button (usually near the top right).
     *   Follow the prompts to create a **new repository** under your own account/organization. This new repository will contain all the code from the template but have a clean Git history.
 
