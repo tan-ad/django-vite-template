@@ -35,6 +35,7 @@ This template provides a solid foundation with:
 
 ## 📁 Project Structure
 
+```
 django-vite-template/ <-- Git repository root
 ├── backend/ <-- Django project root (BASE_DIR)
 │ ├── django_vite_template/ <-- Django settings/config directory
@@ -78,7 +79,7 @@ django-vite-template/ <-- Git repository root
 ├── .gitignore
 ├── docker-compose.yml <-- Docker Compose configuration for development
 └── README.md <-- This file
-
+```
 
 ---
 
