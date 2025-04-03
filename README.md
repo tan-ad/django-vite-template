@@ -85,51 +85,52 @@ django-vite-template/ <-- Git repository root
 
 ## 🚀 Getting Started (Development)
 
-This project uses **Docker Compose** for a consistent development environment. Follow the steps below to get the application running. Optional steps are included for enhancing your local IDE experience.
+This project provides a template structure. The recommended way to use it is via your Git hosting platform's template feature (if available), which creates a new repository for you with this code but without the template's history.
 
 ### Prerequisites
 
-*   [Git](https://git-scm.com/)
+*   [Git](https://git-scm.com/) (You'll need this to manage your new project)
+*   A GitHub/GitLab (or similar) account
 *   [Docker Engine](https://docs.docker.com/engine/install/)
 *   [Docker Compose](https://docs.docker.com/compose/install/) (Often included with Docker Desktop)
-*   [Python 3.13+](https://www.python.org/) (Required if setting up local venv for IDE)
-*   [Node.js and npm](https://nodejs.org/) (Required if setting up local Node modules for IDE)
+*   [Python 3.13+](https://www.python.org/) (If setting up local venv for IDE)
+*   [Node.js and npm](https://nodejs.org/) (If setting up local Node modules for IDE)
 
-### Setup & Running with Docker (Primary Method)
+### Setup & Running (Using Template Feature)
 
-1.  **Clone the repository:**
+1.  **Create Your Own Repository from this Template:**
+    *   Navigate to the main page of *this* template repository on GitHub/GitLab.
+    *   Click the "**Use this template**" button (usually near the top right).
+    *   Follow the prompts to create a **new repository** under your own account/organization. This new repository will contain all the code from the template but have a clean Git history.
+
+2.  **Clone Your New Repository:**
+    Now, clone the repository *you just created*:
     ```bash
-    git clone <your-repository-url>
-    cd django-vite-template
+    git clone <url_of_YOUR_new_repository>
+    cd <your_new_repository_name>
     ```
 
-2.  **Create Backend Environment File (`.env`):**
-    The backend requires environment variables for configuration, especially secrets.
-    *   Navigate to the backend directory: `cd backend`
+3.  **Create Backend Environment File (`.env`):**
+    *   Navigate into the `backend` directory: `cd backend`
     *   Copy the example environment file: `cp .env.example .env`
-    *   **Generate a SECRET_KEY:** The default `.env.example` has a placeholder. Generate a new, secure key using Django's utility. If you have Python installed locally:
+    *   **Generate a SECRET_KEY:** Follow the instructions in the `.env.example` or run:
         ```bash
         # Ensure you are in the 'backend' directory
         python manage.py shell -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
         ```
-        (If you don't have Python locally yet, you can temporarily comment out the `env_file` line in `docker-compose.yml`, run `docker-compose run --rm backend python manage.py shell -c '...'`, copy the key, uncomment `env_file`, and then proceed).
-    *   **Edit `.env`:** Open the newly created `backend/.env` file and **replace** the placeholder value for `SECRET_KEY` with the key you just generated. Review other variables – the defaults in `.env.example` are generally suitable for Docker development.
+    *   **Edit `.env`:** Open `backend/.env` and replace the `SECRET_KEY` placeholder with your generated key. Review other default variables.
     *   Navigate back to the project root: `cd ..`
 
-3.  **Build and Run Containers:**
-    From the project root directory (where `docker-compose.yml` is located):
+4.  **Build and Run Containers:**
+    From the project root directory:
     ```bash
     docker-compose up --build
     ```
-    *   This builds the Docker images (installing Python and Node dependencies *inside* the images) and starts the `backend` and `frontend` containers.
-    *   Your local code is mounted into the containers for live updates.
-    *   Logs from both containers will appear in your terminal.
 
-4.  **Access the Application:**
-    Once both containers show they are running successfully, open your web browser:
-    ➡️ **`http://localhost:8000`**
+5.  **Access the Application:**
+    Open your web browser to: ➡️ **`http://localhost:8000`**
 
-5.  **Stopping:** Press `Ctrl+C` in the terminal running `docker-compose`. To remove containers, use `docker-compose down`.
+6.  **Stopping:** Press `Ctrl+C`, then optionally `docker-compose down`.
 
 ---
 
