@@ -1,8 +1,6 @@
-<!-- frontend/src/App.vue -->
 <script setup>
 // Import RouterLink if you want navigation links here
 import { RouterLink, RouterView } from 'vue-router'
-// import HelloWorld from './components/HelloWorld.vue' // Remove default HelloWorld if not needed
 </script>
 
 <template>
